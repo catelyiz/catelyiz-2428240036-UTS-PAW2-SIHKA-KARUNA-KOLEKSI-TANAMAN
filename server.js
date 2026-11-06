@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import songRoutes from "./routes/songRoutes.js";
+import tanamanRoutes from "./routes/tanamanRoutes.js";
 
 // Load environment variables
 dotenv.config();
