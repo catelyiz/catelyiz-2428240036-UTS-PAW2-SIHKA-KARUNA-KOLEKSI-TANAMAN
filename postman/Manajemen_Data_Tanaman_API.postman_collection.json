@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Manajemen Data Tanaman API",
+		"description": "Collection untuk menguji CRUD API Manajemen Data Tanaman - KUIS 1 PAW2 2026/2027",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "tanaman_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Create Tanaman",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"if (response.data && response.data._id) {",
+							"    pm.collectionVariables.set('tanaman_id', response.data._id);",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tanaman 1\",\n    \"plant_type\": \"Bunga\",\n    \"watering_interval_days\": 7,\n    \"location\": \"Dalam Ruangan\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/tanamans",
+					"host": ["{{base_url}}"],
+					"path": ["api", "tanamans"]
+				},
+				"description": "Membuat data tanaman baru ke dalam database MongoDB."
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tanaman",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tanamans",
+					"host": ["{{base_url}}"],
+					"path": ["api", "tanamans"]
+				},
+				"description": "Mengambil seluruh data tanaman dari database MongoDB."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tanaman By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tanamans/{{tanaman_id}}",
+					"host": ["{{base_url}}"],
+					"path": ["api", "tanamans", "{{tanaman_id}}"]
+				},
+				"description": "Mengambil satu data tanaman berdasarkan ID MongoDB."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Tanaman",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tanaman 1 Updated\",\n    \"plant_type\": \"Bunga\",\n    \"watering_interval_days\": 7,\n    \"location\": \"Dalam Ruangan\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/tanamans/{{tanaman_id}}",
+					"host": ["{{base_url}}"],
+					"path": ["api", "tanamans", "{{tanaman_id}}"]
+				},
+				"description": "Memperbarui data tanaman yang sudah ada berdasarkan ID."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tanaman",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tanamans/{{tanaman_id}}",
+					"host": ["{{base_url}}"],
+					"path": ["api", "tanamans", "{{tanaman_id}}"]
+				},
+				"description": "Menghapus data tanaman berdasarkan ID."
+			},
+			"response": []
+		}
+	]
+}
